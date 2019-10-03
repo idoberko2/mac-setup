@@ -1,0 +1,18 @@
+{
+    "workbench.colorTheme": "Visual Studio Dark",
+    "editor.fontSize": 14,
+    "window.zoomLevel": 0,
+
+    "files.exclude": {
+        "**/mush*": true
+    },
+    "team.showWelcomeMessage": false,
+    "terminal.external.osxExec": "iTerm2.app",
+    "git.autofetch": true,
+    "jest.autoEnable": false,
+    "eslint.enable": false,
+    "terminal.integrated.rendererType": "dom",
+    "gitlens.defaultDateStyle": "absolute",
+    "editor.fontFamily": "Roboto Mono for Powerline",
+    "editor.fontWeight": "bold"
+}
