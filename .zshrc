@@ -8,7 +8,6 @@ export ZSH="/Users/idoberko2/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# ZSH_THEME="fishy"
 ZSH_THEME=""
 
 # Set list of themes to pick from when loading at random
@@ -27,8 +26,14 @@ ZSH_THEME=""
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
 
+# Uncomment the following line to automatically update without prompting.
+# DISABLE_UPDATE_PROMPT="true"
+
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS=true
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -64,13 +69,14 @@ ZSH_THEME=""
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  	git 
+	git 
 	docker 
 	encode64 
 	jsontools
 	zsh-nvm
 	zsh-syntax-highlighting
 	zsh-autosuggestions
+	git-prune
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -92,36 +98,39 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
+alias zshconfig="vim ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 autoload -U promptinit; promptinit
 prompt pure
+zstyle :prompt:pure:path color cyan
 
 # Useful aliases
-alias servers="cat ~/.ssh/config | grep \"Host \""
-alias dcu="docker-compose up -d"
-alias dcd="docker-compose down"
-alias zshconfig="nvim ~/.zshrc"
+alias dps='docker ps --format "table {{.Names}}({{.ID}})\t{{.Image}}\t{{.Status}}\t{{.Ports}}"'
+alias dcu='docker-compose up -d'
+alias dcd='docker-compose down'
+alias autoheal='docker run -d \
+    --name autoheal \
+    --restart=always \
+    -e AUTOHEAL_CONTAINER_LABEL=all \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    willfarrell/autoheal'
+alias gota='go test ./...'
+alias gotanc='go test -count=1 ./...'
+alias gotcov='gocov test ./... | gocov-html > coverage.html'
 
-# NVM
-alias nvm-exec=~/.nvm/nvm-exec
-
-# Oni
-export LC_ALL=en_US.UTF-8  
-export LANG=en_US.UTF-8
-alias Oni="/Applications/Oni.app/Contents/MacOS/Oni"
-
-# Go
-export GOPATH=$HOME/go
+# Go 
+export GOPATH="${HOME}/.go"
+export GOROOT="$(brew --prefix golang)/libexec"
+export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+test -d "${GOPATH}" || mkdir "${GOPATH}"
+test -d "${GOPATH}/src/github.com" || mkdir -p "${GOPATH}/src/github.com"
+test -d "${GOPATH}/src/bitbucket.org" || mkdir -p "${GOPATH}/src/bitbucket.org"
