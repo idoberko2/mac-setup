@@ -73,7 +73,7 @@ plugins=(
 	docker 
 	encode64 
 	jsontools
-	zsh-nvm
+#	zsh-nvm
 	zsh-syntax-highlighting
 	zsh-autosuggestions
 	git-prune
@@ -104,8 +104,12 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias zshconfig="vim ~/.zshrc"
+alias zshconfig="code ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# Nexite infra
+alias sstag='gcloud compute ssh instance-group-jenkins-stg-2-bfs8'
+alias sprod='gcloud compute ssh nexite-poc-group-1-pftx'
 
 # source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
@@ -117,6 +121,8 @@ zstyle :prompt:pure:path color cyan
 alias dps='docker ps --format "table {{.Names}}({{.ID}})\t{{.Image}}\t{{.Status}}\t{{.Ports}}"'
 alias dcu='docker-compose up -d'
 alias dcd='docker-compose down'
+alias gifrom='git fetch && git rebase origin/master'
+alias gifros='git fetch && git rebase origin/staging'
 alias autoheal='docker run -d \
     --name autoheal \
     --restart=always \
@@ -124,6 +130,16 @@ alias autoheal='docker run -d \
     -v /var/run/docker.sock:/var/run/docker.sock \
     willfarrell/autoheal'
 alias gota='go test ./...'
+function goterr () {
+    for ((i = 1; i <= 10; i++)); do
+        echo "Iteration: $i"
+        go test -count=1 ./...
+        c=$?
+        if [ $c -ne 0 ]; then 
+	        break 
+        fi;
+    done
+}
 alias gotanc='go test -count=1 ./...'
 alias gotcov='gocov test ./... | gocov-html > coverage.html'
 
@@ -131,6 +147,21 @@ alias gotcov='gocov test ./... | gocov-html > coverage.html'
 export GOPATH="${HOME}/.go"
 export GOROOT="$(brew --prefix golang)/libexec"
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+export GOPRIVATE="bitbucket.org/nexite"
 test -d "${GOPATH}" || mkdir "${GOPATH}"
 test -d "${GOPATH}/src/github.com" || mkdir -p "${GOPATH}/src/github.com"
 test -d "${GOPATH}/src/bitbucket.org" || mkdir -p "${GOPATH}/src/bitbucket.org"
+
+# Flutter
+export PATH="$PATH:${HOME}/flutter/bin"
+export FLUTTER_ROOT="${HOME}/flutter/bin"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/idoberko2/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/idoberko2/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/idoberko2/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/idoberko2/google-cloud-sdk/completion.zsh.inc'; fi
+
+# K8S
+alias kx='kubectx'
+alias kn='kubens'

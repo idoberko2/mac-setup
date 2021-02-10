@@ -1,8 +1,19 @@
 {
-    "workbench.colorTheme": "Visual Studio Dark",
+    "workbench.colorTheme": "Default Light+",
     "editor.fontSize": 14,
+    "editor.fontFamily": "Fira Code",
+    "editor.fontLigatures": true,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
+    "editor.cursorBlinking": "smooth",
+    "editor.cursorStyle": "line",
+    "editor.formatOnType": false,
+    "editor.letterSpacing": 0.5,
+    "editor.lineHeight": 25,
+    "breadcrumbs.enabled": true,
+    "debug.toolBarLocation": "floating",
+    "search.showLineNumbers": true,
     "window.zoomLevel": 0,
-
     "files.exclude": {
         "**/mush*": true
     },
@@ -13,6 +24,50 @@
     "eslint.enable": false,
     "terminal.integrated.rendererType": "dom",
     "gitlens.defaultDateStyle": "absolute",
-    "editor.fontFamily": "Roboto Mono for Powerline",
-    "editor.fontWeight": "bold"
+    "go.formatTool": "goimports",
+    "go.useLanguageServer": true,
+    "yaml.schemas": {
+        "file:///Users/idoberko2/.vscode/extensions/atlassian.atlascode-2.8.5/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    },
+    "atlascode.jira.jqlList": [
+        {
+            "enabled": true,
+            "id": "882889b8-180f-47bc-b3aa-55708dd783b9",
+            "monitor": false,
+            "name": "My Open Issues",
+            "query": "assignee = currentUser() AND status IN (\"Ready for Development\", Backlog, \"In Progress\", Open)",
+            "siteId": "8e7ee66c-92d0-472d-9ce4-f34768bc9410"
+        },
+        {
+            "enabled": false,
+            "id": "aa27c502-08b9-4be1-9e7d-799a0c76a3ca",
+            "monitor": false,
+            "name": "Currently Working on",
+            "query": "assignee = currentUser() AND status in (\"In Progress\")",
+            "siteId": "8e7ee66c-92d0-472d-9ce4-f34768bc9410"
+        },
+        {
+            "enabled": true,
+            "id": "430868c3-679d-401b-a5be-26df75c6bdda",
+            "monitor": true,
+            "name": "Current sprint",
+            "query": "project = Nexsys AND assignee = currentUser() AND Sprint in openSprints() AND status IN (\"Ready for Development\", Backlog, \"In Progress\", Open)",
+            "siteId": "8e7ee66c-92d0-472d-9ce4-f34768bc9410"
+        }
+    ],
+    "atlascode.bitbucket.pipelines.explorerEnabled": false,
+    "atlascode.bitbucket.issues.explorerEnabled": false,
+    "atlascode.jira.lastCreateSiteAndProject": {
+        "siteId": "8e7ee66c-92d0-472d-9ce4-f34768bc9410",
+        "projectKey": "NEX"
+    },
+    "git.confirmSync": false,
+    "go.goroot": "$(brew --prefix golang)/libexec/bin",
+    "window.confirmBeforeClose": "keyboardOnly",
+    "workbench.editorAssociations": [
+        {
+                "viewType": "default",
+                "filenamePattern": "git-rebase-todo"
+        }
+    ]
 }
