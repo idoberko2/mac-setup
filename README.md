@@ -17,3 +17,6 @@ Based on [this article](https://www.freecodecamp.org/news/jazz-up-your-zsh-termi
 # Apps
 ## VS Code
 Execute `cp ./vscode_settings.json $HOME/Library/Application\ Support/Code/User/settings.json`
+
+## Rectangle
+Install from [here](https://rectangleapp.com/)
